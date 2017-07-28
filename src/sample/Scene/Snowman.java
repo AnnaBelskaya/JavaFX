@@ -32,7 +32,6 @@ public class Snowman {
         }
         drawEyes(pane);
         drawNose(pane);
-        drawHands(pane);
     }
     private void drawEyes(Pane pane){
         double r = body[2].getRadius()/8;
@@ -62,29 +61,6 @@ public class Snowman {
         line.setStroke(Paint.valueOf(colorRed));
         line.setStrokeWidth(3);
         return line;
-    }
-
-    private void drawHands(Pane pane){
-        Line rightHand = new Line();
-        Line leftHand = new Line();
-        double r = body[1].getRadius();
-        double x = body[1].getCenterX();
-        double y = body[1].getCenterY();
-
-        //right hand
-        rightHand.setStartX(x+r);
-        rightHand.setStartY(y);
-        rightHand.setEndX(x+100);
-        rightHand.setEndY(y-100);
-        rightHand.setStrokeWidth(3);
-
-        //left hand
-        leftHand.setStartX(x-r);
-        leftHand.setStartY(y);
-        leftHand.setEndX(x-100);
-        leftHand.setEndY(y-100);
-        leftHand.setStrokeWidth(3);
-        pane.getChildren().addAll(leftHand, rightHand);
     }
 
     public void paintGradient(){

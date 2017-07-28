@@ -19,6 +19,7 @@ public class SnowField {
     private Pane pane = new Pane();
     private Scene scene = new Scene(pane);
     private Snowman snowman = new Snowman();
+    private Star star;
     private Elements elements = new Elements(pane);
     private Circle[] circles;
 
@@ -54,9 +55,7 @@ public class SnowField {
         TextField starRadius = elements.addTextField("1-100", 110, 420);
 
         buildButton.setOnMouseClicked(event -> {
-            clearField(buildButton, ruinButton, colorRedButton,
-                    createSnowman,addGradient,createStar, nightMode,
-                    tf1,tf2,tf3,centerX,centerY,starRadius);
+            clearScreen();
             try {
                 int number = Integer.parseInt(tf1.getText());
                 int minRad = Integer.parseInt(tf2.getText());
@@ -67,10 +66,7 @@ public class SnowField {
         });
 
         ruinButton.setOnMouseClicked(event -> {
-            //pane.getChildren().removeAll(circles);
-            clearField(buildButton, ruinButton, colorRedButton,
-                    createSnowman,addGradient,createStar, nightMode,
-                    tf1,tf2,tf3,centerX, centerY,starRadius);
+            clearScreen();
         });
 
         colorRedButton.setOnMouseClicked(event -> {
@@ -78,33 +74,23 @@ public class SnowField {
         });
 
         createSnowman.setOnMouseClicked(event -> {
-            clearField(buildButton, ruinButton, colorRedButton,
-                    createSnowman,addGradient,createStar, nightMode,
-                    tf1,tf2,tf3,centerX, centerY,starRadius);
-            //pane.getChildren().removeAll(circles);
-            snowman.drawBody(pane);
-            addGradient.setDisable(false);
+           clearScreen();
+           snowman.drawBody(pane);
+           addGradient.setDisable(false);
         });
 
         addGradient.setOnMouseClicked(event -> {
             snowman.paintGradient();
         });
 
-
         createStar.setOnMouseClicked(event -> {
-
+            clearScreen();
             try {
-            Star star = new Star(pane, Double.parseDouble(centerX.getText()),
+            star = new Star(pane, Double.parseDouble(centerX.getText()),
                     Double.parseDouble(centerY.getText()),
                     Double.parseDouble(starRadius.getText()));
-                //pane.getChildren().removeAll(circles);
-
-            clearField(buildButton, ruinButton, colorRedButton,
-                    createSnowman,addGradient, createStar, nightMode,
-                    tf1,tf2,tf3,centerX, centerY,starRadius);
                 star.drawStar();
-            } catch (NumberFormatException e){
-            }
+            } catch (NumberFormatException e){ }
         });
 
         nightMode.setOnMouseClicked(event -> {
@@ -113,7 +99,7 @@ public class SnowField {
                 nightMode.setText("Day\nmode");
             } else {
                 nightMode.setText("Night\nmode");
-                pane.setStyle("-fx-background: #87CEEB;");
+                pane.setStyle("-fx-background: #27408B;");
             }
         });
 
@@ -178,13 +164,17 @@ public class SnowField {
         }
     }
 
-    private void clearField(Button b1, Button b2, Button b3, Button b4, Button b5,
-                            Button b6,Button b7,  TextField tf1, TextField tf2,
-                            TextField tf3,TextField tf4,TextField tf5,
-                            TextField tf6){
-        pane.getChildren().clear();
-        pane.getChildren().addAll(b1,b2,b3,b4,b5, b6, b7);
-        elements.addElements();
-        pane.getChildren().addAll(tf1,tf2,tf3,tf4,tf5,tf6);
+    private void clearScreen(){
+        try {
+            pane.getChildren().removeAll(circles);
+        } catch (NullPointerException e){ }
+        try {
+            pane.getChildren().removeAll(snowman.body);
+            pane.getChildren().removeAll(snowman.nose);
+            pane.getChildren().removeAll(snowman.eyes);
+        } catch (NullPointerException e){ }
+        try {
+            pane.getChildren().removeAll(star.line);
+        } catch (NullPointerException e){ }
     }
 }

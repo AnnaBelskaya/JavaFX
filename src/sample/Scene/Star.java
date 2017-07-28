@@ -7,6 +7,7 @@ import javafx.scene.shape.Line;
 
 public class Star {
     private Pane pane = new Pane();
+    public  Line[] line = new Line[11];
     private String starColor = Color.LIGHTGOLDENRODYELLOW.toString();
     private double centerX;
     private double centerY;
@@ -21,7 +22,6 @@ public class Star {
 
     public void drawStar(){
         double alpfa = Math.PI*2/10;
-        Line[] line = new Line[11];
         int j = -1;
         for (int i=11; i >0; i--){
             double r = radius*(i % 2 + 1)/2;

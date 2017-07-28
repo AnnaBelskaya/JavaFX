@@ -1,7 +1,5 @@
 package utils;
 
-import com.sun.javafx.scene.control.skin.ColorPalette;
-import javafx.scene.control.ColorPicker;
 import javafx.scene.control.Label;
 import javafx.scene.control.Separator;
 import javafx.scene.control.TextField;
@@ -68,10 +66,4 @@ public class Elements {
         pane.getChildren().add(tf);
         return tf;
     }
-/*
-    private ColorPalette addColorPalette(){
-        ColorPalette colorPalette = new ColorPalette(new ColorPicker());
-        colorPalette.isResizable();
-        return colorPalette;
-    }*/
 }

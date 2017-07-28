@@ -57,12 +57,10 @@ public class SnowField {
         buildButton.setOnMouseClicked(event -> {
             clearScreen();
             try {
-                int number = Integer.parseInt(tf1.getText());
-                int minRad = Integer.parseInt(tf2.getText());
-                int maxRad = Integer.parseInt(tf3.getText());
-                buildTower(number, minRad, maxRad);
-            } catch (Exception e) {
-            }
+                buildTower(Integer.parseInt(tf1.getText()),
+                        Integer.parseInt(tf2.getText()),
+                        Integer.parseInt(tf3.getText()));
+            } catch (Exception e) { }
         });
 
         ruinButton.setOnMouseClicked(event -> {

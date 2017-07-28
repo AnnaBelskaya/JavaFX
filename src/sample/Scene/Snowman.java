@@ -8,6 +8,8 @@ import sample.Main;
 
 public class Snowman {
     public Circle[] body = new Circle[3];
+    public Circle[] eyes = new Circle[2];
+    public Line[] nose = new Line[2];
     private String colorWhite = "#FFFFFF";
     private String colorRed = "#FF0000";
 
@@ -36,16 +38,17 @@ public class Snowman {
         double r = body[2].getRadius()/8;
         double x = body[2].getCenterX() - body[2].getRadius()/3;
         double y = body[2].getCenterY() - body[2].getRadius()/3;
-        pane.getChildren().add(new Circle(x,y,r));
+        eyes[0] = new Circle(x,y,r);
         x = body[2].getCenterX() + body[2].getRadius()/3;
-        pane.getChildren().add(new Circle(x,y,r));
+        eyes[1] = new Circle(x,y,r);
+        pane.getChildren().addAll(eyes[0],eyes[1]);
     }
 
     private void drawNose(Pane pane){
-        Line line1 = prepareNose();
-        Line line2 = prepareNose();
-        line1.setStartY(line1.getStartY() + 10);
-        pane.getChildren().addAll(line1, line2);
+        nose[0] = prepareNose();
+        nose[1] = prepareNose();
+        nose[0].setStartY(nose[0].getStartY() + 10);
+        pane.getChildren().addAll(nose[0], nose[1]);
     }
 
     private Line prepareNose(){

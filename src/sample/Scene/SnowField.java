@@ -67,8 +67,9 @@ public class SnowField {
         });
 
         ruinButton.setOnMouseClicked(event -> {
+            //pane.getChildren().removeAll(circles);
             clearField(buildButton, ruinButton, colorRedButton,
-                createSnowman,addGradient,createStar, nightMode,
+                    createSnowman,addGradient,createStar, nightMode,
                     tf1,tf2,tf3,centerX, centerY,starRadius);
         });
 
@@ -78,8 +79,9 @@ public class SnowField {
 
         createSnowman.setOnMouseClicked(event -> {
             clearField(buildButton, ruinButton, colorRedButton,
-                    createSnowman,addGradient, createStar, nightMode,
-                    tf1,tf2,tf3,centerX,centerY,starRadius);
+                    createSnowman,addGradient,createStar, nightMode,
+                    tf1,tf2,tf3,centerX, centerY,starRadius);
+            //pane.getChildren().removeAll(circles);
             snowman.drawBody(pane);
             addGradient.setDisable(false);
         });
@@ -90,10 +92,13 @@ public class SnowField {
 
 
         createStar.setOnMouseClicked(event -> {
+
             try {
             Star star = new Star(pane, Double.parseDouble(centerX.getText()),
                     Double.parseDouble(centerY.getText()),
                     Double.parseDouble(starRadius.getText()));
+                //pane.getChildren().removeAll(circles);
+
             clearField(buildButton, ruinButton, colorRedButton,
                     createSnowman,addGradient, createStar, nightMode,
                     tf1,tf2,tf3,centerX, centerY,starRadius);
@@ -127,7 +132,7 @@ public class SnowField {
     }
 
     private void buildTower(int n, int min, int max){
-        circles = new Circle[n];
+        circles = new Circle[n+3];
         for (int i = 0; i < n; i++){
            int radius = ThreadLocalRandom.current().nextInt(min,max+1);
            if (i == 0) {
@@ -146,21 +151,23 @@ public class SnowField {
     }
 
     private void addNose(){
-        int n = circles.length;
+        int n = circles.length-3;
         double x = circles[n-1].getCenterX();
         double y = circles[n-1].getCenterY() + circles[n-1].getRadius()/8;
         double r = circles[n-1].getRadius()/10;
-        pane.getChildren().add(new Circle(x,y,r));
+        circles[n] = new Circle(x,y,r);
+        pane.getChildren().add(circles[n]);
     }
 
     private void addEyes(){
-        int n = circles.length;
+        int n = circles.length-3;
         double r = circles[n-1].getRadius()/8;
         double x = circles[n-1].getCenterX() - circles[n-1].getRadius()/3;
         double y = circles[n-1].getCenterY() - circles[n-1].getRadius()/3;
-        pane.getChildren().add(new Circle(x,y,r));
+        circles[n+1] = new Circle(x,y,r);
         x = circles[n-1].getCenterX() + circles[n-1].getRadius()/3;
-        pane.getChildren().add(new Circle(x,y,r));
+        circles[n+2] = new Circle(x,y,r);
+        pane.getChildren().addAll(circles[n+1],circles[n+2]);
     }
 
     private void makeAllCirclesRed(){
